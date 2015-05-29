@@ -27,7 +27,7 @@ namespace CheckPoint2_1
                             if (punctuation != null)
                             {
                                 sentence.Add(punctuation);
-                                if (punctuation.IsFinishSentence)
+                                if (punctuation.IsEndSentence)
                                 {
                                     text.Add(new Sentence(sentence));
                                     sentence = new Collection<ISentenceItem>();

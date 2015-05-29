@@ -26,7 +26,7 @@ namespace CheckPoint2_1.PartOfTexts
 
         public static Word GetWordByStringValue(string value)
         {
-            return new Word(value, Consonant.Contains(value.First()));
+            return new Word(value, Consonant.Contains(value.ToLower().First()));
         }
 
         public int CompareTo(Word other)

@@ -32,7 +32,7 @@ namespace CheckPoint2_1
                 Console.ReadLine();
 
                 Console.WriteLine("Replace words in sentences:"); 
-                Console.WriteLine(MethodsForText.ReplaceWordFromSentence(text, 3, 6, "replaced word")); 
+                Console.WriteLine(MethodsForText.ReplaceWordFromSentence(text, 3, 7, "replaced word")); 
                 Console.ReadLine();
                
             }

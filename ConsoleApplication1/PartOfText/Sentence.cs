@@ -65,6 +65,7 @@ namespace CheckPoint2_1.PartOfTexts
                 return (this.Last() == Punctuation.GetPunctuationByStringValue("?") ||
                         this.Last() == Punctuation.GetPunctuationByStringValue("?!"));
             }
+            
             throw new FormatException("Sentence hasn't punctuation in the end");
         }
 

@@ -2,6 +2,6 @@
 {
     interface IPunctuation : ISentenceItem
     {
-        bool IsFinishSentence { get; }
+        bool IsEndSentence { get; }
     }
 }

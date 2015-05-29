@@ -19,11 +19,6 @@ namespace CheckPoint2_1
             var num = 0;
             foreach (var symbol in text)
             {
-                //if (symbol == '"' || symbol == '(' || symbol == ')' || symbol == '[' || symbol == ']' || symbol == '{' || symbol == '}')
-                //{
-                  //  text = text.Replace(symbol + "", "");
-                //}
-                
                 if ((symbol == '-' || symbol == '–' || symbol == '—' || symbol == '—') && text[num - 1] == ' ')
                 {
                     text = text.Replace(" " +symbol, "-"+" ");

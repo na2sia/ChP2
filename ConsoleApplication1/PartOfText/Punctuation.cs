@@ -4,13 +4,13 @@ namespace CheckPoint2_1.PartOfTexts
 {
     class Punctuation : IPunctuation
     {
-        private Punctuation(string stringValue, bool isFinish)
+        private Punctuation(string stringValue, bool isEnd)
         {
             Value = stringValue;
-            IsFinishSentence = isFinish;
+            IsEndSentence = isEnd;
         }
         public string Value { get; private set; }
-        public bool IsFinishSentence { get; private set; }
+        public bool IsEndSentence { get; private set; }
 
         public static readonly Punctuation[] VariablesPunctuations =
         {

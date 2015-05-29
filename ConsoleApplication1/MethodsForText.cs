@@ -25,21 +25,10 @@ namespace CheckPoint2_1
 
             foreach (var sentenceItem in text.Where(sentence => sentence.IsInterrogativeSentence).SelectMany(sentence => sentence))
             {
-                try
-                {
-                   var word = (Word)sentenceItem;
-                    if (word.Value.Length == count)
-                    {
-                        if (!tempListWords.Contains(word.Value))
-                        {
-                            tempListWords.Add(word.Value);
-                        }
-                    }
-                }
-                catch
-                {
-                    //Console.WriteLine("In the text there are no questions");      
-                }
+                
+                if (sentenceItem is Word)
+                    if (sentenceItem.Value.Length == count)
+                        if (!tempListWords.Contains(sentenceItem.Value)) tempListWords.Add(sentenceItem.Value.ToLower());
             }
             return tempListWords;
         }
@@ -51,60 +40,34 @@ namespace CheckPoint2_1
             {
                 var newSentence = new Collection<ISentenceItem>();
                 foreach (var sentenceItem in sentence)
-                {
-                    try
+                {  
+                    if (sentenceItem is Word)
                     {
                         var word = (Word)sentenceItem;
-                        if (word.Value.Length != count)
-                            newSentence.Add(word);
+                        if (!word.IsConsonantBegining) newSentence.Add(word);
+                        if (word.IsConsonantBegining)
+                           if (word.Value.Length != count) newSentence.Add(word);
                     }
-                    catch
-                    {
-                        newSentence.Add(sentenceItem);
-                    }
+                    else newSentence.Add(sentenceItem);
                 }
                 tempText.Add(new Sentence(newSentence));
             }
             return tempText;
-                /*Text tempText = new Text();
-            //tempText = Value.ToList();
-            foreach (var sentence in tempText.ElementAt(1))
-
-            //.SelectMany(sentence => sentence.  .Value.Where(word => word.IsConsonant && word.Value.Count() == lenghtOfWords)))
-            {
-                var word = (Word)sentence;
-                if (word.IsConsonantBegining)
-                { word = new Word(""); }
-                
-               // sentence.Select(word=>word.Value. )
-                foreach (var sentenceItem in sentence)
-                { 
-                    var word = (Word)sentenceItem;
-                    if (word.Value.Count() == count)
-                    { }
-                }
-                word.Value.Clear();
-            }
-            return tempText;
-           */
-        }
+         }
 
         public static Sentence ReplaceWordFromSentence(Text text, int sentencesNumber, int wordsCount, string substring)
         {
             var sentence = new Collection<ISentenceItem>();
             foreach (var sentenceItem in text.ElementAt(sentencesNumber))
             {
-                try
+                if (sentenceItem is Word)
                 {
                     var word = (Word)sentenceItem;
                     if (word.Value.Length == wordsCount)
-                        word=Word.GetWordByStringValue(substring);
+                        word = Word.GetWordByStringValue(substring);
                     sentence.Add(word);
                 }
-                catch
-                {
-                    sentence.Add(sentenceItem);
-                }
+                else sentence.Add(sentenceItem);
             }
             return new Sentence(sentence);
         }

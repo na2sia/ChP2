@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.IO;
 using CheckPoint2_1.PartOfTexts;
 
 namespace CheckPoint2_1
@@ -58,18 +59,23 @@ namespace CheckPoint2_1
         public static Sentence ReplaceWordFromSentence(Text text, int sentencesNumber, int wordsCount, string substring)
         {
             var sentence = new Collection<ISentenceItem>();
-            foreach (var sentenceItem in text.ElementAt(sentencesNumber))
-            {
-                if (sentenceItem is Word)
+            if ((text.Count - sentencesNumber) > 0)
+            { 
+                foreach (var sentenceItem in text.ElementAt(sentencesNumber))
                 {
-                    var word = (Word)sentenceItem;
-                    if (word.Value.Length == wordsCount)
-                        word = Word.GetWordByStringValue(substring);
-                    sentence.Add(word);
+                    if (sentenceItem is Word)
+                    {
+                        var word = (Word)sentenceItem;
+                        if (word.Value.Length == wordsCount)
+                            word = Word.GetWordByStringValue(substring);
+                        sentence.Add(word);
+                    }
+                    else sentence.Add(sentenceItem);
                 }
-                else sentence.Add(sentenceItem);
+                return new Sentence(sentence);
             }
-            return new Sentence(sentence);
+
+            return null;
         }
     }
 }

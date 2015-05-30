@@ -7,20 +7,20 @@ namespace CheckPoint2_1.PartOfTexts
 {
     class Text : ICollection<Sentence>
     {
-        private readonly ICollection<Sentence> _sentencesCollection;
+        private readonly ICollection<Sentence> sentencesCollection;
 
         public Text()
         {
-            _sentencesCollection = new Collection<Sentence>();
-            IsReadOnly = _sentencesCollection.IsReadOnly;
-            Count = _sentencesCollection.Count;
+            sentencesCollection = new Collection<Sentence>();
+            IsReadOnly = sentencesCollection.IsReadOnly;
+            Count = sentencesCollection.Count;
             
         }
 
-        #region methoods of interface
+        #region ICollection
         public IEnumerator<Sentence> GetEnumerator()
         {
-            return _sentencesCollection.GetEnumerator();
+            return sentencesCollection.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -30,29 +30,29 @@ namespace CheckPoint2_1.PartOfTexts
 
         public void Add(Sentence item)
         {
-            _sentencesCollection.Add(item);
-            Count = _sentencesCollection.Count;
+            sentencesCollection.Add(item);
+            Count = sentencesCollection.Count;
         }
 
         public void Clear()
         {
-            _sentencesCollection.Clear();
+            sentencesCollection.Clear();
             Count = 0;
         }
 
         public bool Contains(Sentence item)
         {
-            return _sentencesCollection.Contains(item);
+            return sentencesCollection.Contains(item);
         }
 
         public void CopyTo(Sentence[] array, int arrayIndex)
         {
-            _sentencesCollection.CopyTo(array, arrayIndex);
+            sentencesCollection.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(Sentence item)
         {
-            return _sentencesCollection.Remove(item);
+            return sentencesCollection.Remove(item);
         }
         #endregion
         public int Count { get; private set; }

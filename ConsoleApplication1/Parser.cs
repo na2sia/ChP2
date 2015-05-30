@@ -22,8 +22,14 @@ namespace CheckPoint2_1
                             if (numPunctuation < numCurrentSymbol) {sentence.Add(Word.GetWordByStringValue(fullText.Substring(numFirstSymbol, numCurrentSymbol - numFirstSymbol)));}
                             numPunctuation = numCurrentSymbol + 1;
                             numFirstSymbol = numCurrentSymbol;
-                            var punctuation = Punctuation.GetPunctuationByStringValue(fullText.Substring(numCurrentSymbol, numPunctuation - numCurrentSymbol));
-
+                            
+                            if (numPunctuation<=fullText.Length-1 && char.IsPunctuation(fullText[numPunctuation]))
+                            {
+                                numPunctuation++;
+                                numCurrentSymbol++;
+                            }
+                            
+                         var punctuation = Punctuation.GetPunctuationByStringValue(fullText.Substring(numFirstSymbol, numPunctuation - numFirstSymbol));
                             if (punctuation != null)
                             {
                                 sentence.Add(punctuation);
@@ -32,13 +38,11 @@ namespace CheckPoint2_1
                                     text.Add(new Sentence(sentence));
                                     sentence = new Collection<ISentenceItem>();
                                 }
-
                             }
-                            numFirstSymbol = numCurrentSymbol+1;
+                         numFirstSymbol = numCurrentSymbol+1;
                         }
                      numFirstSymbol = numCurrentSymbol+1;
                      numPunctuation = numCurrentSymbol + 1; 
- 
                 }
                 numCurrentSymbol++;
             }

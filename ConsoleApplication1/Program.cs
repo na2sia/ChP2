@@ -29,7 +29,7 @@ namespace CheckPoint2_1
                 Console.WriteLine(MethodsForText.DeleteWordFromText(text, 7) + Environment.NewLine);
               
                 Console.WriteLine("Replace words in sentences:"); 
-                Console.WriteLine(MethodsForText.ReplaceWordFromSentence(text, 9, 7, "replaced word")); 
+                Console.WriteLine(MethodsForText.ReplaceWordFromSentence(text, 0, 7, "replaced word")); 
                              
             }
             catch (FileNotFoundException exception)

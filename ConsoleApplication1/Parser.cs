@@ -17,30 +17,40 @@ namespace CheckPoint2_1
             {
                 if (!char.IsLetterOrDigit(fullText[numCurrentSymbol]))
                 {
-                     if ((char.IsWhiteSpace(fullText[numCurrentSymbol]))||(char.IsPunctuation(fullText[numCurrentSymbol])))
+                    if (char.IsWhiteSpace(fullText[numCurrentSymbol]))
+                    {
+                         if (numPunctuation < numCurrentSymbol)
+                                sentence.Add(Word.GetWordByStringValue(fullText.Substring(numFirstSymbol, numCurrentSymbol - numFirstSymbol)));
+                         
+                         numPunctuation = numCurrentSymbol + 1;
+                         numFirstSymbol = numCurrentSymbol;
+                         sentence.Add(Punctuation.GetPunctuationByStringValue(" "));
+                    }
+                    if (char.IsPunctuation(fullText[numCurrentSymbol]))
+                    {
+                        if (numPunctuation < numCurrentSymbol) 
+                                sentence.Add(Word.GetWordByStringValue(fullText.Substring(numFirstSymbol, numCurrentSymbol - numFirstSymbol)));
+                        numPunctuation = numCurrentSymbol + 1;
+                        numFirstSymbol = numCurrentSymbol;
+
+                        while (numPunctuation <= fullText.Length - 1 && char.IsPunctuation(fullText[numPunctuation]))
                         {
-                            if (numPunctuation < numCurrentSymbol) {sentence.Add(Word.GetWordByStringValue(fullText.Substring(numFirstSymbol, numCurrentSymbol - numFirstSymbol)));}
-                            numPunctuation = numCurrentSymbol + 1;
-                            numFirstSymbol = numCurrentSymbol;
-                            
-                            if (numPunctuation<=fullText.Length-1 && char.IsPunctuation(fullText[numPunctuation]))
-                            {
                                 numPunctuation++;
                                 numCurrentSymbol++;
-                            }
-                            
-                         var punctuation = Punctuation.GetPunctuationByStringValue(fullText.Substring(numFirstSymbol, numPunctuation - numFirstSymbol));
-                            if (punctuation != null)
-                            {
+                        }
+                        var punctuation = Punctuation.GetPunctuationByStringValue(fullText.Substring(numFirstSymbol, numPunctuation - numFirstSymbol));
+                        if (punctuation != null)
+                        {
                                 sentence.Add(punctuation);
                                 if (punctuation.IsEndSentence)
                                 {
                                     text.Add(new Sentence(sentence));
                                     sentence = new Collection<ISentenceItem>();
                                 }
-                            }
-                         numFirstSymbol = numCurrentSymbol+1;
                         }
+                        
+                        numFirstSymbol = numCurrentSymbol+1;
+                     }
                      numFirstSymbol = numCurrentSymbol+1;
                      numPunctuation = numCurrentSymbol + 1; 
                 }
